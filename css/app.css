@@ -1,0 +1,269 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.app-shell {
+  min-height: 100vh;
+  direction: ltr;
+}
+
+.app-topbar,
+#language-modal {
+  direction: ltr;
+}
+
+html[lang="ur"] #section-nav,
+html[lang="ur"] main {
+  direction: rtl;
+}
+
+#sidebar .offcanvas-header {
+  position: relative;
+  justify-content: center;
+}
+
+.sidebar-logo {
+  display: block;
+  width: 168px;
+  max-width: calc(100% - 2.5rem);
+  height: auto;
+}
+
+#sidebar .btn-close {
+  position: absolute;
+  top: 0.75rem;
+  inset-inline-end: 0.75rem;
+}
+
+#section-nav .nav-link {
+  text-align: start;
+}
+
+.app-main {
+  min-width: 0;
+}
+
+.menu-toggle {
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+}
+
+.menu-toggle .fa-bars {
+  font-size: 1.15rem;
+}
+
+.app-topbar {
+  position: relative;
+  padding-right: 9rem !important;
+}
+
+#page-title {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.language-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  z-index: 2;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.language-toggle .fa-language {
+  font-size: 1.05rem;
+}
+
+.language-choice {
+  position: relative;
+  min-height: 4.75rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.language-choice .fa-check {
+  position: absolute;
+  inset-inline-end: 0.85rem;
+  opacity: 0;
+}
+
+.language-choice.active .fa-check {
+  opacity: 1;
+}
+
+.kite-size-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 28rem));
+  gap: 1rem;
+}
+
+.kite-size-card {
+  border-inline-start: 4px solid var(--bs-primary);
+}
+
+.kite-size-card[data-lang="ur"] {
+  display: none;
+}
+
+html[lang="ur"] .kite-size-card[data-lang="en"] {
+  display: none;
+}
+
+html[lang="ur"] .kite-size-card[data-lang="ur"] {
+  display: block;
+}
+
+.kite-size-title {
+  padding: 0.9rem 1rem 0.75rem;
+}
+
+.kite-spec div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.kite-spec dt,
+.kite-spec dd {
+  margin: 0;
+}
+
+.kite-spec dt {
+  color: var(--bs-secondary-color);
+  font-weight: 500;
+}
+
+.kite-spec dd {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.lang-text[data-lang="ur"] {
+  display: none;
+}
+
+html[lang="ur"] .lang-text[data-lang="en"] {
+  display: none;
+}
+
+html[lang="ur"] .lang-text[data-lang="ur"] {
+  display: inline;
+}
+
+.bamboo-calc {
+  max-width: 36rem;
+}
+
+.bamboo-size .form-select {
+  max-width: 16rem;
+}
+
+.bamboo-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+.bamboo-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bamboo-entry .form-control {
+  max-width: 12rem;
+}
+
+.bamboo-output,
+.bamboo-total-value {
+  min-width: 4.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.bamboo-paper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.bamboo-paper-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.bamboo-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--bs-border-color);
+  font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+  .bamboo-entry .form-control {
+    max-width: none;
+    flex: 1 1 8rem;
+  }
+}
+
+html[lang="ur"] body,
+.urdu-text {
+  font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+html[lang="ur"] body {
+  line-height: 1.7;
+}
+
+@media (max-width: 575.98px) {
+  .app-topbar {
+    padding-right: 3.75rem !important;
+  }
+
+  #language-toggle-label {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #sidebar.offcanvas-lg {
+    position: sticky;
+    top: 0;
+    flex: 0 0 260px !important;
+    width: 260px !important;
+    max-width: 260px !important;
+    height: 100vh !important;
+    background-color: #fff !important;
+    border-inline-end: 1px solid var(--bs-border-color) !important;
+  }
+
+  #sidebar .offcanvas-header {
+    display: flex;
+  }
+
+  #sidebar .offcanvas-body {
+    padding: 0.75rem;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,22 @@
+Size 1.5 Tawa
+Inputs: 2 inputs 1. 50" bamboo bundle price Default 15000, 2. 34" bundle price default 11000
+calculation output price: Input price / 650 for each input
+Paper Cost: 40
+Total: Output added from both calculations and add fixed paper cost
+
+Size 1 Tawa
+Inputs 40" Default 12000, 28" Default 10000
+Paper Cost: 30
+Divide by 700
+
+Size 3/4 Tawa
+Inputs 36" Default 11000, 26" Default 9000
+Paper Cost: 30
+Divide by 700
+
+Size Adda Pona
+Inputs 34" Default 12000, 24" Default 8000
+Paper Cost: 25
+Divide by 750
+
+Change total to Estimated Total and don't round the total

@@ -142,6 +142,11 @@ html[lang="ur"] main {
   outline-offset: 3px;
 }
 
+.tab-pane:focus,
+.tab-pane:focus-visible {
+  outline: none;
+}
+
 .app-topbar .home-link {
   flex: 0 0 auto;
 }

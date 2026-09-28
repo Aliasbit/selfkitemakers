@@ -186,13 +186,40 @@
     });
   });
 
+  function pinToTop() {
+    const snap = () => {
+      if (window.scrollX !== 0 || window.scrollY !== 0) {
+        window.scrollTo(0, 0);
+      }
+      const focused = document.activeElement;
+      if (focused && focused.classList.contains("tab-pane")) {
+        focused.blur();
+      }
+    };
+    snap();
+    requestAnimationFrame(() => {
+      snap();
+      requestAnimationFrame(snap);
+    });
+  }
+
   window.addEventListener("hashchange", () => {
     showSection(location.hash);
+    pinToTop();
   });
 
+  window.addEventListener("load", pinToTop);
+
   document.querySelectorAll(".home-link").forEach((link) => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const hash = link.getAttribute("href");
+      if (location.hash !== hash) {
+        history.pushState(null, "", hash);
+      }
+      showSection(hash);
       closeSidebar();
+      pinToTop();
     });
   });
 
@@ -343,6 +370,7 @@
   try {
     applyLanguage(savedLanguage || "en");
     showSection(location.hash || "#kite-sizes");
+    pinToTop();
     if (savedLanguage === null) {
       openLanguageModal();
     }

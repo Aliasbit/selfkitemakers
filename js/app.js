@@ -220,6 +220,19 @@
     return String(Math.round(value));
   }
 
+  function formatTotal(value) {
+    return String(Number(value.toFixed(10)));
+  }
+
+  function readPaperCost(panel) {
+    const input = panel.querySelector("input.bamboo-paper-value");
+    if (!input) return null;
+    const raw = input.value.trim();
+    const price = Number(raw);
+    if (raw === "" || !Number.isFinite(price) || price < 0) return null;
+    return price;
+  }
+
   function updateBambooCalcs() {
     const panel = document.querySelector(".bamboo-size-panel:not([hidden])");
     const totalOutput = document.querySelector(".bamboo-total-value");
@@ -241,15 +254,15 @@
       total += result;
       if (output) output.textContent = formatAmount(result);
     });
-    const paper = Number(panel.querySelector(".bamboo-paper-value")?.textContent);
-    if (Number.isFinite(paper)) total += paper;
-    totalOutput.textContent = any || Number.isFinite(paper) ? formatAmount(total) : "";
+    const paper = readPaperCost(panel);
+    if (paper !== null) total += paper;
+    totalOutput.textContent = any || paper !== null ? formatTotal(total) : "";
   }
 
   const BAMBOO_PRICES_KEY = "bamboo-prices";
 
   function bambooInputs() {
-    return document.querySelectorAll(".bamboo-calc input[data-divisor]");
+    return document.querySelectorAll(".bamboo-calc input[data-divisor], .bamboo-calc input.bamboo-paper-value");
   }
 
   function storedPrice(value) {

@@ -190,6 +190,12 @@
     showSection(location.hash);
   });
 
+  document.querySelectorAll(".home-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      closeSidebar();
+    });
+  });
+
   languageToggle.addEventListener("click", () => {
     openLanguageModal();
   });

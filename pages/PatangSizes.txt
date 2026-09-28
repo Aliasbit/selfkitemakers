@@ -1,0 +1,12 @@
+[Spelling Correction]
+Ptang = Patang
+
+
+[Urdu Translation]
+Ptang & Kup sizes = پتنگ اور کپ کے سائز
+Ptang Size= پتنگ کا سائز
+Peeta (Dhool) = پیٹا (ڈھول)
+Gazz Ptang = گز پتنگ
+Gazz KUP = گز کپ
+Paindi = پیندی
+Nuka = نکا

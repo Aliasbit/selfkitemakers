@@ -20,3 +20,18 @@ Paper Cost: 25
 Divide by 750
 
 Change total to Estimated Total and don't round the total
+
+
+[Add Advanced Mode Checkbox]
+When Advanced mode checkbox is clicked
+Show following fields for Paper price calculation
+1. Unit (Reem (ریم), Dasta (دستہ), Paper (کاغذ))
+2. Unit Price
+3. Paper Count/Kite
+
+Reem has 480 pieces default price 9000
+Dasta has 24 pieces default price 450
+Paper has 1 piece default price 19
+
+Automatically apply the calculation when user selects the unit and multiply by the paper count he enters
+apply div/0 check

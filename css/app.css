@@ -287,11 +287,40 @@ html[lang="ur"] .lang-text[data-lang="ur"] {
 }
 
 .bamboo-calc {
-  max-width: 36rem;
+  --bamboo-result: 6.5rem;
+  --bamboo-gap: 0.75rem;
+  --bamboo-columns: minmax(0, 1fr) var(--bamboo-result);
+  max-width: 24rem;
 }
 
-.bamboo-size .form-select {
-  max-width: 16rem;
+.bamboo-size,
+.bamboo-field,
+.bamboo-paper-simple,
+.bamboo-paper-computed,
+.bamboo-total {
+  display: grid;
+  grid-template-columns: var(--bamboo-columns);
+  column-gap: var(--bamboo-gap);
+  align-items: center;
+}
+
+.bamboo-size .form-label,
+.bamboo-field > .form-label,
+.bamboo-paper-simple > .form-label {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.bamboo-size .form-select,
+.bamboo-field > .form-control,
+.bamboo-field > .form-select,
+.bamboo-paper-simple > .form-control,
+.bamboo-entry .form-control {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
 }
 
 .bamboo-fields {
@@ -300,21 +329,39 @@ html[lang="ur"] .lang-text[data-lang="ur"] {
 }
 
 .bamboo-entry {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.bamboo-entry .form-control {
-  max-width: 12rem;
+  display: contents;
 }
 
 .bamboo-output,
-.bamboo-total-value {
-  min-width: 4.5rem;
+.bamboo-total-value,
+.bamboo-paper-result {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  text-align: end;
+  text-align: start;
+  min-width: 0;
+}
+
+.bamboo-output {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.bamboo-advanced {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+  margin-inline-end: calc(var(--bamboo-result) + var(--bamboo-gap));
+}
+
+.bamboo-advanced .form-check-input {
+  margin: 0;
+  float: none;
+  flex: 0 0 auto;
+}
+
+.bamboo-advanced .form-check-label {
+  margin: 0;
 }
 
 .bamboo-paper {
@@ -323,27 +370,42 @@ html[lang="ur"] .lang-text[data-lang="ur"] {
   margin-top: 1rem;
 }
 
-.bamboo-paper .form-control {
-  max-width: 12rem;
+.bamboo-paper-advanced {
+  display: none;
+  gap: 1rem;
 }
 
+.bamboo-calc--advanced .bamboo-paper-simple {
+  display: none;
+}
+
+.bamboo-calc--advanced .bamboo-paper-advanced {
+  display: grid;
+}
+
+.bamboo-paper-computed,
 .bamboo-total {
-  display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--bs-border-color);
   font-weight: 600;
 }
 
-@media (max-width: 575.98px) {
-  .bamboo-entry .form-control,
-  .bamboo-paper .form-control {
-    max-width: none;
-    flex: 1 1 8rem;
-  }
+.bamboo-paper-computed .form-label,
+.bamboo-total .lang-text {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.bamboo-paper-result,
+.bamboo-total-value {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bamboo-total {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--bs-border-color);
 }
 
 html[lang="ur"] body,

@@ -3,13 +3,23 @@
   const STRINGS = {
     en: {
       "nav.label": "Section navigation",
+      "nav.home": "Home",
       "nav.kiteSizes": "Kite sizes",
       "nav.calculator": "Calculator",
       "nav.paper": "Paper Information",
       "nav.thread": "Thread Information",
+      "nav.homeShort": "Home",
+      "nav.kiteSizesShort": "Sizes",
+      "nav.calculatorShort": "Calculator",
+      "nav.paperShort": "Paper",
+      "nav.threadShort": "Thread",
+      "dash.heading": "Pick a section",
+      "dash.kiteSizes": "Kaman, gazz, and paper for each size.",
+      "dash.calculator": "Bamboo bundle and paper cost.",
+      "dash.paper": "Coming soon",
+      "dash.thread": "Coming soon",
       "body.paper": "Coming soon",
       "body.thread": "Coming soon",
-      "menu.open": "Open menu",
       "menu.close": "Close",
       "brand.alt": "Lahore Self Kite Makers",
       "title.suffix": "Self Kite Makers",
@@ -18,13 +28,23 @@
     },
     ur: {
       "nav.label": "حصوں کی فہرست",
+      "nav.home": "ہوم",
       "nav.kiteSizes": "پتنگ کے سائز",
       "nav.calculator": "کیلکولیٹر",
       "nav.paper": "کاغذ کی معلومات",
       "nav.thread": "ڈور کی معلومات",
+      "nav.homeShort": "ہوم",
+      "nav.kiteSizesShort": "سائز",
+      "nav.calculatorShort": "کیلکولیٹر",
+      "nav.paperShort": "کاغذ",
+      "nav.threadShort": "ڈور",
+      "dash.heading": "حصہ منتخب کریں",
+      "dash.kiteSizes": "ہر سائز کی کمان، گز اور کاغذ۔",
+      "dash.calculator": "بانس بنڈل اور کاغذ کی قیمت۔",
+      "dash.paper": "جلد آ رہا ہے",
+      "dash.thread": "جلد آ رہا ہے",
       "body.paper": "جلد آ رہا ہے",
       "body.thread": "جلد آ رہا ہے",
-      "menu.open": "مینیو کھولیں",
       "menu.close": "بند کریں",
       "brand.alt": "لاہور سیلف کائٹ میکرز",
       "title.suffix": "سیلف کائٹ میکرز",
@@ -33,7 +53,6 @@
     },
   };
 
-  const sidebar = document.getElementById("sidebar");
   const pageTitle = document.getElementById("page-title");
   const languageModal = document.getElementById("language-modal");
   const languageClose = document.getElementById("language-modal-close");
@@ -146,14 +165,29 @@
   }
 
   function labelFor(trigger) {
-    return trigger.textContent.trim();
+    const label = trigger.querySelector("[data-i18n]");
+    return (label ? label.textContent : trigger.textContent).trim();
   }
 
-  function closeSidebar() {
-    const instance = bootstrap.Offcanvas.getInstance(sidebar);
-    if (instance) {
-      instance.hide();
-    }
+  function syncSectionLinks(id) {
+    document.querySelectorAll("#mobile-nav [data-open-section]").forEach((link) => {
+      const on = link.getAttribute("href") === "#" + id;
+      link.classList.toggle("active", on);
+      if (on) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  function focusSectionControl(id) {
+    const active = document.activeElement;
+    const pane = active && active.closest ? active.closest(".tab-pane") : null;
+    if (!pane || pane.classList.contains("active")) return;
+    const mobileNav = document.getElementById("mobile-nav");
+    const mobileLink = document.querySelector('#mobile-nav [href="#' + id + '"]');
+    const sidebarLink = document.querySelector('#section-nav [href="#' + id + '"]');
+    const mobileVisible = mobileNav && getComputedStyle(mobileNav).display !== "none";
+    const target = mobileVisible ? mobileLink : sidebarLink;
+    if (target) target.focus();
   }
 
   function syncChrome(trigger) {
@@ -161,14 +195,16 @@
     const label = labelFor(trigger);
     pageTitle.textContent = label;
     document.title = label + " · " + t("title.suffix");
+    syncSectionLinks(id);
     if (location.hash !== "#" + id) {
       history.replaceState(null, "", "#" + id);
     }
+    focusSectionControl(id);
   }
 
   function showSection(hash) {
     if (hash === "#bamboo-calculator") hash = "#calculator";
-    const target = known.has(hash) ? hash : "#kite-sizes";
+    const target = known.has(hash) ? hash : "#home";
     const trigger = triggers.find((item) => item.getAttribute("href") === target);
     if (trigger.classList.contains("active")) {
       syncChrome(trigger);
@@ -180,7 +216,6 @@
   triggers.forEach((trigger) => {
     trigger.addEventListener("shown.bs.tab", (event) => {
       syncChrome(event.target);
-      closeSidebar();
     });
   });
 
@@ -208,7 +243,7 @@
 
   window.addEventListener("load", pinToTop);
 
-  document.querySelectorAll(".home-link").forEach((link) => {
+  document.querySelectorAll(".home-link, [data-open-section]").forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       const hash = link.getAttribute("href");
@@ -216,7 +251,6 @@
         history.pushState(null, "", hash);
       }
       showSection(hash);
-      closeSidebar();
       pinToTop();
     });
   });
@@ -422,7 +456,7 @@
 
   try {
     applyLanguage(savedLanguage || "en");
-    showSection(location.hash || "#kite-sizes");
+    showSection(location.hash || "#home");
     pinToTop();
     if (savedLanguage === null) {
       openLanguageModal();

@@ -298,13 +298,36 @@
   }
 
   function readAdvancedPaperCost(panel) {
-    const unit = panel.querySelector(".bamboo-paper-unit");
     const price = readNumber(panel.querySelector("input.bamboo-paper-unit-price"));
+    const pieces = readNumber(panel.querySelector("input.bamboo-paper-pieces"));
     const count = readNumber(panel.querySelector("input.bamboo-paper-count"));
-    const option = unit && unit.options[unit.selectedIndex];
-    const pieces = option ? Number(option.dataset.pieces) : NaN;
-    if (price === null || count === null || !Number.isFinite(pieces) || pieces === 0) return null;
+    if (price === null || pieces === null || pieces === 0 || count === null) return null;
     return (price / pieces) * count;
+  }
+
+  function writeSummary(selector, amount) {
+    const line = document.querySelector(selector);
+    if (!line) return;
+    const output = line.querySelector("output");
+    if (amount === null) {
+      if (output) output.textContent = "";
+      line.hidden = true;
+      return;
+    }
+    if (output) output.textContent = formatAmount(amount);
+    line.hidden = false;
+  }
+
+  function sumInputs(panel, selector) {
+    let sum = 0;
+    let any = false;
+    panel.querySelectorAll(selector).forEach((input) => {
+      const amount = readNumber(input);
+      if (amount === null) return;
+      any = true;
+      sum += Math.round(amount);
+    });
+    return any ? sum : null;
   }
 
   function updateBambooCalcs() {
@@ -313,36 +336,48 @@
     if (!panel || !totalOutput) return;
     let total = 0;
     let any = false;
-    panel.querySelectorAll("input[data-divisor]").forEach((input) => {
-      const output = panel.querySelector(`[data-output-for="${input.id}"]`);
-      const raw = input.value.trim();
-      const price = Number(raw);
-      const divisor = Number(input.dataset.divisor);
-      const valid = raw !== "" && Number.isFinite(price) && price >= 0 && Number.isFinite(divisor) && divisor !== 0;
-      if (!valid) {
-        if (output) output.textContent = "";
-        return;
-      }
-      const result = Math.round(price / divisor);
-      any = true;
-      total += result;
-      if (output) output.textContent = formatAmount(result);
+    let bambooSum = 0;
+    let bambooAny = false;
+    const units = readNumber(panel.querySelector("input.bamboo-yield"));
+    const unitsOk = units !== null && units !== 0;
+    panel.querySelectorAll("input.bamboo-bundle-price").forEach((input) => {
+      const price = readNumber(input);
+      if (!unitsOk || price === null) return;
+      bambooAny = true;
+      bambooSum += Math.round(price / units);
     });
+    if (bambooAny) {
+      any = true;
+      total += bambooSum;
+    }
+    writeSummary(".bamboo-summary-bamboo", bambooAny ? bambooSum : null);
     const advancedOn = advancedToggle && advancedToggle.checked;
     const paperExact = advancedOn ? readAdvancedPaperCost(panel) : readPaperCost(panel);
     const paper = paperExact === null ? null : Math.round(paperExact);
-    const resultOutput = panel.querySelector(".bamboo-paper-result");
-    if (resultOutput) resultOutput.textContent = advancedOn && paper !== null ? formatAmount(paper) : "";
-    if (paper !== null) total += paper;
-    totalOutput.textContent = any || paper !== null ? formatAmount(total) : "";
+    if (paper !== null) {
+      any = true;
+      total += paper;
+    }
+    writeSummary(".bamboo-summary-paper", paper);
+    const labour = sumInputs(panel, "input.bamboo-labour, input.kite-labour");
+    const decoration = sumInputs(panel, "input.decoration-cost");
+    if (labour !== null) {
+      any = true;
+      total += labour;
+    }
+    if (decoration !== null) {
+      any = true;
+      total += decoration;
+    }
+    writeSummary(".bamboo-summary-labour", labour);
+    writeSummary(".bamboo-summary-decoration", decoration);
+    totalOutput.textContent = any ? formatAmount(total) : "";
   }
 
   const BAMBOO_PRICES_KEY = "bamboo-prices";
 
   function bambooInputs() {
-    return document.querySelectorAll(
-      ".bamboo-calc input[data-divisor], .bamboo-calc input.bamboo-paper-value, .bamboo-calc input.bamboo-paper-unit-price, .bamboo-calc input.bamboo-paper-count"
-    );
+    return document.querySelectorAll(".bamboo-calc input[type='number']");
   }
 
   function storedPrice(value) {
@@ -362,7 +397,8 @@
     document.querySelectorAll(".bamboo-paper-unit").forEach((select) => {
       prices[select.id] = select.value;
     });
-    if (bambooSize) prices.size = bambooSize.value;
+    const size = selectedBambooSize();
+    if (size) prices.size = size;
     if (advancedToggle) prices.advanced = advancedToggle.checked;
     try {
       localStorage.setItem(BAMBOO_PRICES_KEY, JSON.stringify(prices));
@@ -392,32 +428,63 @@
       const knownUnit = typeof value === "string" && [...select.options].some((option) => option.value === value);
       if (knownUnit) select.value = value;
     });
+    copyLegacyCost(prices, "input.bamboo-labour", "bamboo-labour");
+    copyLegacyCost(prices, "input.kite-labour", "kite-labour");
+    copyLegacyCost(prices, "input.decoration-cost", "decoration-cost");
+    document.querySelectorAll(".bamboo-paper-advanced").forEach((fields) => {
+      const select = fields.querySelector(".bamboo-paper-unit");
+      const piecesInput = fields.querySelector(".bamboo-paper-pieces");
+      if (!select || !piecesInput || Object.prototype.hasOwnProperty.call(prices, piecesInput.id)) return;
+      const option = select.options[select.selectedIndex];
+      if (option && option.dataset.pieces) piecesInput.value = option.dataset.pieces;
+    });
     const size = typeof prices.size === "string" ? prices.size : "";
-    const knownSize = bambooSize && [...bambooSize.options].some((option) => option.value === size);
+    const knownSize = [...bambooSizeChoices()].some((button) => button.dataset.size === size);
     if (knownSize) {
-      bambooSize.value = size;
       showBambooSize(size);
       return;
     }
     updateBambooCalcs();
   }
 
+  function copyLegacyCost(prices, selector, legacyKey) {
+    const legacy = storedPrice(prices[legacyKey]);
+    if (!legacy) return;
+    document.querySelectorAll(selector).forEach((input) => {
+      if (Object.prototype.hasOwnProperty.call(prices, input.id)) return;
+      input.value = legacy;
+    });
+  }
+
+  function bambooSizeChoices() {
+    return document.querySelectorAll(".bamboo-size-choice");
+  }
+
+  function selectedBambooSize() {
+    const selected = document.querySelector(".bamboo-size-choice.is-selected");
+    return selected ? selected.dataset.size : "";
+  }
+
   function showBambooSize(sizeId) {
+    bambooSizeChoices().forEach((button) => {
+      const on = button.dataset.size === sizeId;
+      button.classList.toggle("is-selected", on);
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
     document.querySelectorAll(".bamboo-size-panel").forEach((panel) => {
       panel.hidden = panel.dataset.size !== sizeId;
     });
     updateBambooCalcs();
   }
 
-  const bambooSize = document.getElementById("bamboo-size");
   const bambooForm = document.getElementById("bamboo-calc");
   const advancedToggle = document.getElementById("bamboo-advanced");
-  if (bambooSize) {
-    bambooSize.addEventListener("change", () => {
-      showBambooSize(bambooSize.value);
+  bambooSizeChoices().forEach((button) => {
+    button.addEventListener("click", () => {
+      showBambooSize(button.dataset.size);
       saveBambooPrices();
     });
-  }
+  });
 
   if (bambooForm) {
     bambooForm.addEventListener("submit", (event) => {
@@ -438,7 +505,9 @@
       const option = select.options[select.selectedIndex];
       const fields = select.closest(".bamboo-paper-advanced");
       const priceInput = fields ? fields.querySelector(".bamboo-paper-unit-price") : null;
+      const piecesInput = fields ? fields.querySelector(".bamboo-paper-pieces") : null;
       if (option && priceInput && option.dataset.price) priceInput.value = option.dataset.price;
+      if (option && piecesInput && option.dataset.pieces) piecesInput.value = option.dataset.pieces;
       updateBambooCalcs();
       saveBambooPrices();
     });

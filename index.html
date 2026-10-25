@@ -500,17 +500,29 @@
               aria-labelledby="calculator-tab"
               tabindex="0">
               <form class="bamboo-calc" id="bamboo-calc">
-                <div class="bamboo-size mb-4">
-                  <label class="form-label" for="bamboo-size">
+                <div class="bamboo-size mb-3">
+                  <div class="form-label" id="bamboo-size-label">
                     <span class="lang-text" data-lang="en">Size</span>
                     <span class="lang-text" data-lang="ur" lang="ur">سائز</span>
-                  </label>
-                  <select id="bamboo-size" class="form-select">
-                    <option value="tawa-15" data-en="1.5 Tawa" data-ur="1.5 تاوا">1.5 Tawa</option>
-                    <option value="tawa-1" data-en="1 Tawa" data-ur="1 تاوا">1 Tawa</option>
-                    <option value="tawa-34" data-en="3/4 Tawa" data-ur="پونا تاوا">3/4 Tawa</option>
-                    <option value="adda-pona" data-en="Adda Pona" data-ur="آڈا پونا">Adda Pona</option>
-                  </select>
+                  </div>
+                  <div class="bamboo-size-choices" role="radiogroup" aria-labelledby="bamboo-size-label">
+                    <button type="button" class="bamboo-size-choice is-selected" data-size="tawa-15" aria-pressed="true">
+                      <span class="lang-text" data-lang="en">1.5 Tawa</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">1.5 تاوا</span>
+                    </button>
+                    <button type="button" class="bamboo-size-choice" data-size="tawa-1" aria-pressed="false">
+                      <span class="lang-text" data-lang="en">1 Tawa</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">1 تاوا</span>
+                    </button>
+                    <button type="button" class="bamboo-size-choice" data-size="tawa-34" aria-pressed="false">
+                      <span class="lang-text" data-lang="en">3/4 Tawa</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">پونا تاوا</span>
+                    </button>
+                    <button type="button" class="bamboo-size-choice" data-size="adda-pona" aria-pressed="false">
+                      <span class="lang-text" data-lang="en">Adda Pona</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">آڈا پونا</span>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="bamboo-advanced">
@@ -522,39 +534,57 @@
                 </div>
 
                 <div class="bamboo-size-panel" data-size="tawa-15">
-                  <div class="bamboo-fields">
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-15-50">
-                        <span class="lang-text" data-lang="en">50" bamboo bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">50 انچ بانس بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-15-50" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="650" value="15000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-15-50"></output>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Bamboo Bundle</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">بانس بنڈل</span>
+                    </div>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="yield-tawa-15">
+                          <span class="lang-text" data-lang="en">Teeli Yield/Bundle</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">تیلی پیداوار/بنڈل</span>
+                        </label>
+                        <input id="yield-tawa-15" class="form-control bamboo-yield" type="number" inputmode="decimal" min="0" step="any" value="650" autocomplete="off">
                       </div>
                     </div>
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-15-34">
-                        <span class="lang-text" data-lang="en">34" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">34 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-15-34" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="650" value="11000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-15-34"></output>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-15-50">
+                          <span class="lang-text" data-lang="en">50"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">50 انچ</span>
+                        </label>
+                        <input id="bamboo-15-50" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="15000" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-15-34">
+                          <span class="lang-text" data-lang="en">34"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">34 انچ</span>
+                        </label>
+                        <input id="bamboo-15-34" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="11000" autocomplete="off">
                       </div>
                     </div>
                   </div>
-                  <div class="bamboo-paper">
-                    <div class="bamboo-paper-simple">
-                      <label class="form-label mb-1" for="paper-15">
-                        <span class="lang-text" data-lang="en">Paper cost</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                      </label>
-                      <input id="paper-15" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="40" autocomplete="off">
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Paper</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">کاغذ</span>
                     </div>
-                    <div class="bamboo-paper-advanced">
+                    <div class="bamboo-paper-simple">
+                      <div class="bamboo-pair">
+                        <div class="bamboo-field">
+                          <label class="form-label" for="paper-15">
+                            <span class="lang-text" data-lang="en">Paper cost</span>
+                            <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
+                          </label>
+                          <input id="paper-15" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="40" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="bamboo-paper-advanced">
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-15">
+                        <label class="form-label" for="paper-unit-15">
                           <span class="lang-text" data-lang="en">Paper Unit</span>
                           <span class="lang-text" data-lang="ur" lang="ur">کاغذ کا یونٹ</span>
                         </label>
@@ -565,64 +595,114 @@
                         </select>
                       </div>
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-price-15">
+                        <label class="form-label" for="paper-unit-price-15">
                           <span class="lang-text" data-lang="en">Unit price</span>
                           <span class="lang-text" data-lang="ur" lang="ur">یونٹ کی قیمت</span>
                         </label>
                         <input id="paper-unit-price-15" class="form-control bamboo-paper-unit-price" type="number" inputmode="decimal" min="0" step="any" value="9000" autocomplete="off">
                       </div>
+                    </div>
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-count-15">
+                        <label class="form-label" for="paper-pieces-15">
+                          <span class="lang-text" data-lang="en">Number of papers</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">کاغذوں کی تعداد</span>
+                        </label>
+                        <input id="paper-pieces-15" class="form-control bamboo-paper-pieces" type="number" inputmode="decimal" min="0" step="any" value="480" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="paper-count-15">
                           <span class="lang-text" data-lang="en">Paper count/kite</span>
                           <span class="lang-text" data-lang="ur" lang="ur">فی پتنگ کاغذ کی تعداد</span>
                         </label>
                         <input id="paper-count-15" class="form-control bamboo-paper-count" type="number" inputmode="decimal" min="0" step="any" value="2" autocomplete="off">
                       </div>
-                      <div class="bamboo-paper-computed">
-                        <span class="form-label mb-0">
-                          <span class="lang-text" data-lang="en">Paper cost</span>
-                          <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                        </span>
-                        <output class="bamboo-paper-result" for="paper-unit-15 paper-unit-price-15 paper-count-15"></output>
-                      </div>
                     </div>
+                  </div>
+                  </div>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Labour</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">مزدوری</span>
+                    </div>
+                    <div class="bamboo-pair">
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-bamboo-15">
+                        <span class="lang-text" data-lang="en">Bamboo labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">بانس کی مزدوری</span>
+                      </label>
+                      <input id="labour-bamboo-15" class="form-control bamboo-labour" type="number" inputmode="decimal" min="0" step="any" value="50" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-kite-15">
+                        <span class="lang-text" data-lang="en">Kite labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">پتنگ کی مزدوری</span>
+                      </label>
+                      <input id="labour-kite-15" class="form-control kite-labour" type="number" inputmode="decimal" min="0" step="any" value="100" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="decoration-15">
+                        <span class="lang-text" data-lang="en">Decoration cost</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">سجاوٹ کی لاگت</span>
+                      </label>
+                      <input id="decoration-15" class="form-control decoration-cost" type="number" inputmode="decimal" min="0" step="any" autocomplete="off">
+                    </div>
+                  </div>
                   </div>
                 </div>
 
                 <div class="bamboo-size-panel" data-size="tawa-1" hidden>
-                  <div class="bamboo-fields">
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-1-40">
-                        <span class="lang-text" data-lang="en">40" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">40 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-1-40" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="700" value="12000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-1-40"></output>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Bamboo Bundle</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">بانس بنڈل</span>
+                    </div>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="yield-tawa-1">
+                          <span class="lang-text" data-lang="en">Teeli Yield/Bundle</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">تیلی پیداوار/بنڈل</span>
+                        </label>
+                        <input id="yield-tawa-1" class="form-control bamboo-yield" type="number" inputmode="decimal" min="0" step="any" value="650" autocomplete="off">
                       </div>
                     </div>
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-1-28">
-                        <span class="lang-text" data-lang="en">28" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">28 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-1-28" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="700" value="10000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-1-28"></output>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-1-40">
+                          <span class="lang-text" data-lang="en">40"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">40 انچ</span>
+                        </label>
+                        <input id="bamboo-1-40" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="12000" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-1-28">
+                          <span class="lang-text" data-lang="en">28"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">28 انچ</span>
+                        </label>
+                        <input id="bamboo-1-28" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="10000" autocomplete="off">
                       </div>
                     </div>
                   </div>
-                  <div class="bamboo-paper">
-                    <div class="bamboo-paper-simple">
-                      <label class="form-label mb-1" for="paper-1">
-                        <span class="lang-text" data-lang="en">Paper cost</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                      </label>
-                      <input id="paper-1" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="30" autocomplete="off">
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Paper</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">کاغذ</span>
                     </div>
-                    <div class="bamboo-paper-advanced">
+                    <div class="bamboo-paper-simple">
+                      <div class="bamboo-pair">
+                        <div class="bamboo-field">
+                          <label class="form-label" for="paper-1">
+                            <span class="lang-text" data-lang="en">Paper cost</span>
+                            <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
+                          </label>
+                          <input id="paper-1" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="30" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="bamboo-paper-advanced">
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-1">
+                        <label class="form-label" for="paper-unit-1">
                           <span class="lang-text" data-lang="en">Paper Unit</span>
                           <span class="lang-text" data-lang="ur" lang="ur">کاغذ کا یونٹ</span>
                         </label>
@@ -633,64 +713,114 @@
                         </select>
                       </div>
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-price-1">
+                        <label class="form-label" for="paper-unit-price-1">
                           <span class="lang-text" data-lang="en">Unit price</span>
                           <span class="lang-text" data-lang="ur" lang="ur">یونٹ کی قیمت</span>
                         </label>
                         <input id="paper-unit-price-1" class="form-control bamboo-paper-unit-price" type="number" inputmode="decimal" min="0" step="any" value="9000" autocomplete="off">
                       </div>
+                    </div>
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-count-1">
+                        <label class="form-label" for="paper-pieces-1">
+                          <span class="lang-text" data-lang="en">Number of papers</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">کاغذوں کی تعداد</span>
+                        </label>
+                        <input id="paper-pieces-1" class="form-control bamboo-paper-pieces" type="number" inputmode="decimal" min="0" step="any" value="480" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="paper-count-1">
                           <span class="lang-text" data-lang="en">Paper count/kite</span>
                           <span class="lang-text" data-lang="ur" lang="ur">فی پتنگ کاغذ کی تعداد</span>
                         </label>
                         <input id="paper-count-1" class="form-control bamboo-paper-count" type="number" inputmode="decimal" min="0" step="any" value="1" autocomplete="off">
                       </div>
-                      <div class="bamboo-paper-computed">
-                        <span class="form-label mb-0">
-                          <span class="lang-text" data-lang="en">Paper cost</span>
-                          <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                        </span>
-                        <output class="bamboo-paper-result" for="paper-unit-1 paper-unit-price-1 paper-count-1"></output>
-                      </div>
                     </div>
+                  </div>
+                  </div>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Labour</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">مزدوری</span>
+                    </div>
+                    <div class="bamboo-pair">
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-bamboo-1">
+                        <span class="lang-text" data-lang="en">Bamboo labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">بانس کی مزدوری</span>
+                      </label>
+                      <input id="labour-bamboo-1" class="form-control bamboo-labour" type="number" inputmode="decimal" min="0" step="any" value="50" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-kite-1">
+                        <span class="lang-text" data-lang="en">Kite labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">پتنگ کی مزدوری</span>
+                      </label>
+                      <input id="labour-kite-1" class="form-control kite-labour" type="number" inputmode="decimal" min="0" step="any" value="100" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="decoration-1">
+                        <span class="lang-text" data-lang="en">Decoration cost</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">سجاوٹ کی لاگت</span>
+                      </label>
+                      <input id="decoration-1" class="form-control decoration-cost" type="number" inputmode="decimal" min="0" step="any" autocomplete="off">
+                    </div>
+                  </div>
                   </div>
                 </div>
 
                 <div class="bamboo-size-panel" data-size="tawa-34" hidden>
-                  <div class="bamboo-fields">
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-34-36">
-                        <span class="lang-text" data-lang="en">36" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">36 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-34-36" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="700" value="11000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-34-36"></output>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Bamboo Bundle</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">بانس بنڈل</span>
+                    </div>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="yield-tawa-34">
+                          <span class="lang-text" data-lang="en">Teeli Yield/Bundle</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">تیلی پیداوار/بنڈل</span>
+                        </label>
+                        <input id="yield-tawa-34" class="form-control bamboo-yield" type="number" inputmode="decimal" min="0" step="any" value="750" autocomplete="off">
                       </div>
                     </div>
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-34-26">
-                        <span class="lang-text" data-lang="en">26" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">26 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-34-26" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="700" value="9000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-34-26"></output>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-34-36">
+                          <span class="lang-text" data-lang="en">36"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">36 انچ</span>
+                        </label>
+                        <input id="bamboo-34-36" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="11000" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-34-26">
+                          <span class="lang-text" data-lang="en">26"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">26 انچ</span>
+                        </label>
+                        <input id="bamboo-34-26" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="9000" autocomplete="off">
                       </div>
                     </div>
                   </div>
-                  <div class="bamboo-paper">
-                    <div class="bamboo-paper-simple">
-                      <label class="form-label mb-1" for="paper-34">
-                        <span class="lang-text" data-lang="en">Paper cost</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                      </label>
-                      <input id="paper-34" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="30" autocomplete="off">
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Paper</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">کاغذ</span>
                     </div>
-                    <div class="bamboo-paper-advanced">
+                    <div class="bamboo-paper-simple">
+                      <div class="bamboo-pair">
+                        <div class="bamboo-field">
+                          <label class="form-label" for="paper-34">
+                            <span class="lang-text" data-lang="en">Paper cost</span>
+                            <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
+                          </label>
+                          <input id="paper-34" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="30" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="bamboo-paper-advanced">
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-34">
+                        <label class="form-label" for="paper-unit-34">
                           <span class="lang-text" data-lang="en">Paper Unit</span>
                           <span class="lang-text" data-lang="ur" lang="ur">کاغذ کا یونٹ</span>
                         </label>
@@ -701,64 +831,114 @@
                         </select>
                       </div>
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-price-34">
+                        <label class="form-label" for="paper-unit-price-34">
                           <span class="lang-text" data-lang="en">Unit price</span>
                           <span class="lang-text" data-lang="ur" lang="ur">یونٹ کی قیمت</span>
                         </label>
                         <input id="paper-unit-price-34" class="form-control bamboo-paper-unit-price" type="number" inputmode="decimal" min="0" step="any" value="9000" autocomplete="off">
                       </div>
+                    </div>
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-count-34">
+                        <label class="form-label" for="paper-pieces-34">
+                          <span class="lang-text" data-lang="en">Number of papers</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">کاغذوں کی تعداد</span>
+                        </label>
+                        <input id="paper-pieces-34" class="form-control bamboo-paper-pieces" type="number" inputmode="decimal" min="0" step="any" value="480" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="paper-count-34">
                           <span class="lang-text" data-lang="en">Paper count/kite</span>
                           <span class="lang-text" data-lang="ur" lang="ur">فی پتنگ کاغذ کی تعداد</span>
                         </label>
                         <input id="paper-count-34" class="form-control bamboo-paper-count" type="number" inputmode="decimal" min="0" step="any" value="1" autocomplete="off">
                       </div>
-                      <div class="bamboo-paper-computed">
-                        <span class="form-label mb-0">
-                          <span class="lang-text" data-lang="en">Paper cost</span>
-                          <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                        </span>
-                        <output class="bamboo-paper-result" for="paper-unit-34 paper-unit-price-34 paper-count-34"></output>
-                      </div>
                     </div>
+                  </div>
+                  </div>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Labour</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">مزدوری</span>
+                    </div>
+                    <div class="bamboo-pair">
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-bamboo-34">
+                        <span class="lang-text" data-lang="en">Bamboo labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">بانس کی مزدوری</span>
+                      </label>
+                      <input id="labour-bamboo-34" class="form-control bamboo-labour" type="number" inputmode="decimal" min="0" step="any" value="50" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-kite-34">
+                        <span class="lang-text" data-lang="en">Kite labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">پتنگ کی مزدوری</span>
+                      </label>
+                      <input id="labour-kite-34" class="form-control kite-labour" type="number" inputmode="decimal" min="0" step="any" value="100" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="decoration-34">
+                        <span class="lang-text" data-lang="en">Decoration cost</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">سجاوٹ کی لاگت</span>
+                      </label>
+                      <input id="decoration-34" class="form-control decoration-cost" type="number" inputmode="decimal" min="0" step="any" autocomplete="off">
+                    </div>
+                  </div>
                   </div>
                 </div>
 
                 <div class="bamboo-size-panel" data-size="adda-pona" hidden>
-                  <div class="bamboo-fields">
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-adda-34">
-                        <span class="lang-text" data-lang="en">34" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">34 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-adda-34" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="750" value="12000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-adda-34"></output>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Bamboo Bundle</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">بانس بنڈل</span>
+                    </div>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="yield-adda">
+                          <span class="lang-text" data-lang="en">Teeli Yield/Bundle</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">تیلی پیداوار/بنڈل</span>
+                        </label>
+                        <input id="yield-adda" class="form-control bamboo-yield" type="number" inputmode="decimal" min="0" step="any" value="750" autocomplete="off">
                       </div>
                     </div>
-                    <div class="bamboo-field">
-                      <label class="form-label mb-1" for="bamboo-adda-24">
-                        <span class="lang-text" data-lang="en">24" bundle price</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">24 انچ بنڈل کی قیمت</span>
-                      </label>
-                      <div class="bamboo-entry">
-                        <input id="bamboo-adda-24" class="form-control" type="number" inputmode="decimal" min="0" step="any" data-divisor="750" value="8000" autocomplete="off">
-                        <output class="bamboo-output" data-output-for="bamboo-adda-24"></output>
+                    <div class="bamboo-pair">
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-adda-34">
+                          <span class="lang-text" data-lang="en">34"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">34 انچ</span>
+                        </label>
+                        <input id="bamboo-adda-34" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="12000" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="bamboo-adda-24">
+                          <span class="lang-text" data-lang="en">24"</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">24 انچ</span>
+                        </label>
+                        <input id="bamboo-adda-24" class="form-control bamboo-bundle-price" type="number" inputmode="decimal" min="0" step="any" value="8000" autocomplete="off">
                       </div>
                     </div>
                   </div>
-                  <div class="bamboo-paper">
-                    <div class="bamboo-paper-simple">
-                      <label class="form-label mb-1" for="paper-adda">
-                        <span class="lang-text" data-lang="en">Paper cost</span>
-                        <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                      </label>
-                      <input id="paper-adda" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="25" autocomplete="off">
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Paper</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">کاغذ</span>
                     </div>
-                    <div class="bamboo-paper-advanced">
+                    <div class="bamboo-paper-simple">
+                      <div class="bamboo-pair">
+                        <div class="bamboo-field">
+                          <label class="form-label" for="paper-adda">
+                            <span class="lang-text" data-lang="en">Paper cost</span>
+                            <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
+                          </label>
+                          <input id="paper-adda" class="form-control bamboo-paper-value" type="number" inputmode="decimal" min="0" step="any" value="25" autocomplete="off">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="bamboo-paper-advanced">
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-adda">
+                        <label class="form-label" for="paper-unit-adda">
                           <span class="lang-text" data-lang="en">Paper Unit</span>
                           <span class="lang-text" data-lang="ur" lang="ur">کاغذ کا یونٹ</span>
                         </label>
@@ -769,34 +949,92 @@
                         </select>
                       </div>
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-unit-price-adda">
+                        <label class="form-label" for="paper-unit-price-adda">
                           <span class="lang-text" data-lang="en">Unit price</span>
                           <span class="lang-text" data-lang="ur" lang="ur">یونٹ کی قیمت</span>
                         </label>
                         <input id="paper-unit-price-adda" class="form-control bamboo-paper-unit-price" type="number" inputmode="decimal" min="0" step="any" value="9000" autocomplete="off">
                       </div>
+                    </div>
+                    <div class="bamboo-pair">
                       <div class="bamboo-field">
-                        <label class="form-label mb-1" for="paper-count-adda">
+                        <label class="form-label" for="paper-pieces-adda">
+                          <span class="lang-text" data-lang="en">Number of papers</span>
+                          <span class="lang-text" data-lang="ur" lang="ur">کاغذوں کی تعداد</span>
+                        </label>
+                        <input id="paper-pieces-adda" class="form-control bamboo-paper-pieces" type="number" inputmode="decimal" min="0" step="any" value="480" autocomplete="off">
+                      </div>
+                      <div class="bamboo-field">
+                        <label class="form-label" for="paper-count-adda">
                           <span class="lang-text" data-lang="en">Paper count/kite</span>
                           <span class="lang-text" data-lang="ur" lang="ur">فی پتنگ کاغذ کی تعداد</span>
                         </label>
                         <input id="paper-count-adda" class="form-control bamboo-paper-count" type="number" inputmode="decimal" min="0" step="any" value="1" autocomplete="off">
                       </div>
-                      <div class="bamboo-paper-computed">
-                        <span class="form-label mb-0">
-                          <span class="lang-text" data-lang="en">Paper cost</span>
-                          <span class="lang-text" data-lang="ur" lang="ur">کاغذ کی قیمت</span>
-                        </span>
-                        <output class="bamboo-paper-result" for="paper-unit-adda paper-unit-price-adda paper-count-adda"></output>
-                      </div>
                     </div>
+                  </div>
+                  </div>
+                  <div class="bamboo-group">
+                    <div class="bamboo-section-label">
+                      <span class="lang-text" data-lang="en">Labour</span>
+                      <span class="lang-text" data-lang="ur" lang="ur">مزدوری</span>
+                    </div>
+                    <div class="bamboo-pair">
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-bamboo-adda">
+                        <span class="lang-text" data-lang="en">Bamboo labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">بانس کی مزدوری</span>
+                      </label>
+                      <input id="labour-bamboo-adda" class="form-control bamboo-labour" type="number" inputmode="decimal" min="0" step="any" value="50" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="labour-kite-adda">
+                        <span class="lang-text" data-lang="en">Kite labour</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">پتنگ کی مزدوری</span>
+                      </label>
+                      <input id="labour-kite-adda" class="form-control kite-labour" type="number" inputmode="decimal" min="0" step="any" value="100" autocomplete="off">
+                    </div>
+                    <div class="bamboo-field">
+                      <label class="form-label" for="decoration-adda">
+                        <span class="lang-text" data-lang="en">Decoration cost</span>
+                        <span class="lang-text" data-lang="ur" lang="ur">سجاوٹ کی لاگت</span>
+                      </label>
+                      <input id="decoration-adda" class="form-control decoration-cost" type="number" inputmode="decimal" min="0" step="any" autocomplete="off">
+                    </div>
+                  </div>
                   </div>
                 </div>
 
-                <div class="bamboo-total">
-                  <span class="lang-text" data-lang="en">Estimated Total</span>
-                  <span class="lang-text" data-lang="ur" lang="ur">تخمینی کل</span>
-                  <output class="bamboo-total-value"></output>
+                <div class="bamboo-summary">
+                  <div class="bamboo-section-label">
+                    <span class="lang-text" data-lang="en">Summary</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">خلاصہ</span>
+                  </div>
+                  <div class="bamboo-summary-line bamboo-summary-bamboo">
+                    <span class="lang-text" data-lang="en">Bamboo</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">بانس</span>
+                    <output class="bamboo-summary-value"></output>
+                  </div>
+                  <div class="bamboo-summary-line bamboo-summary-paper">
+                    <span class="lang-text" data-lang="en">Paper</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">کاغذ</span>
+                    <output class="bamboo-summary-value"></output>
+                  </div>
+                  <div class="bamboo-summary-line bamboo-summary-labour">
+                    <span class="lang-text" data-lang="en">Labour</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">مزدوری</span>
+                    <output class="bamboo-summary-value"></output>
+                  </div>
+                  <div class="bamboo-summary-line bamboo-summary-decoration" hidden>
+                    <span class="lang-text" data-lang="en">Decoration</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">سجاوٹ</span>
+                    <output class="bamboo-summary-value"></output>
+                  </div>
+                  <div class="bamboo-total">
+                    <span class="lang-text" data-lang="en">Estimated Total</span>
+                    <span class="lang-text" data-lang="ur" lang="ur">تخمینی کل</span>
+                    <output class="bamboo-total-value"></output>
+                  </div>
                 </div>
               </form>
             </section>

@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100%;
+  min-height: 100dvh;
 }
 
 :root {
@@ -78,7 +78,7 @@ body {
 }
 
 .app-shell {
-  min-height: 100vh;
+  min-height: 100dvh;
   direction: ltr;
 }
 
@@ -551,11 +551,10 @@ html[lang="ur"] .dash-card-text {
   isolation: isolate;
   display: flex;
   flex: 1 1 auto;
-  align-items: safe center;
-  justify-content: safe center;
+  align-items: flex-start;
+  justify-content: center;
   overflow: visible;
-  min-height: 28rem;
-  padding: 1.35rem 0.85rem 1.5rem;
+  padding: 0.65rem 0.85rem 1rem;
   border-radius: 1.15rem;
   background:
     radial-gradient(ellipse at 50% 58%, rgba(255, 252, 248, 0.55), transparent 58%),
@@ -593,8 +592,12 @@ html[lang="ur"] .dash-card-text {
 
 @media (max-width: 767.98px) {
   .kite-anchor {
-    top: 62%;
+    top: 58%;
     width: 116%;
+  }
+
+  .dashboard-stage {
+    padding: 0.35rem 0.65rem 0.75rem;
   }
 }
 
